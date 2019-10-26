@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.sda.spring.model.User;
 
+import javax.persistence.Table;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -103,5 +104,14 @@ public class UserRepositoryTest {
         //then
         assertThat(userRepository.count()).isEqualTo(3);
         assertThat(userRepository.findById("user").get()).isEqualTo(updatedUser);
+    }
+    
+    
+    @Test
+    public void shouldReturnjJohnny(){
+        Optional<User> actual = userRepository.authenticate("user2", "user2");
+        
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual.get()).isEqualTo(user2);
     }
 }
